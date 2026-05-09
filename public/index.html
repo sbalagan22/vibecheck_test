@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow — Streamline Your Productivity</title>
+  <meta name="description" content="A premium, glassmorphic task manager web app to seamlessly add, track, and manage your daily tasks in a single intuitive workspace.">
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header" id="app-header">
+    <div class="container nav-container">
+      <div class="logo-area">
+        <div class="logo-icon">⚡</div>
+        <span class="logo-text">Task<span>Flow</span></span>
+      </div>
+      <nav class="navigation" id="main-nav">
+        <ul class="nav-links">
+          <li><a href="#" id="nav-home" class="nav-link active">Home</a></li>
+          <li><a href="#" id="nav-dashboard" class="nav-link hidden">Dashboard</a></li>
+          <li><a href="#" id="nav-admin" class="nav-link">Admin Panel</a></li>
+        </ul>
+        <div class="user-session" id="user-session-widget">
+          <span class="user-greeting" id="header-user-name"></span>
+          <button id="btn-logout" class="btn btn-secondary hidden">Logout</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Notification Toaster Container -->
+  <div class="toaster-container" id="toast-container"></div>
+
+  <!-- App Main Content Container -->
+  <main class="main-content container" id="app-main-view">
+    
+    <!-- 1. LANDING & AUTHENTICATION VIEW -->
+    <section id="view-landing" class="view-section active">
+      <div class="landing-grid">
+        <div class="landing-hero">
+          <span class="badge">Next-Gen Workspace</span>
+          <h1 class="hero-title">Manage your tasks with effortless flow.</h1>
+          <p class="hero-subtitle">
+            An elegant, hyper-focused space designed to clear your mind, structure your schedule, and execute your daily goals with stunning speed and fluid interactions.
+          </p>
+          <div class="hero-stats">
+            <div class="hero-stat-card">
+              <span class="stat-num">10x</span>
+              <span class="stat-label">Faster Flow</span>
+            </div>
+            <div class="hero-stat-card">
+              <span class="stat-num">100%</span>
+              <span class="stat-label">Focus State</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-card-container">
+          <div class="auth-card glass-panel">
+            <div class="auth-tabs">
+              <button id="tab-login" class="auth-tab active">Sign In</button>
+              <button id="tab-signup" class="auth-tab">Create Account</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="form-login" class="auth-form active">
+              <div class="form-group">
+                <label for="login-email">Email Address</label>
+                <input type="email" id="login-email" class="form-input" placeholder="you@example.com" required autocomplete="email">
+              </div>
+              <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+              </div>
+              <button type="submit" id="btn-submit-login" class="btn btn-primary btn-full">Sign In to Dashboard</button>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="form-signup" class="auth-form">
+              <div class="form-group">
+                <label for="signup-username">Username</label>
+                <input type="text" id="signup-username" class="form-input" placeholder="yourname" required autocomplete="username">
+              </div>
+              <div class="form-group">
+                <label for="signup-email">Email Address</label>
+                <input type="email" id="signup-email" class="form-input" placeholder="you@example.com" required autocomplete="email">
+              </div>
+              <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" class="form-input" placeholder="••••••••" required autocomplete="new-password">
+              </div>
+              <button type="submit" id="btn-submit-signup" class="btn btn-primary btn-full">Create Free Account</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. DASHBOARD VIEW (AUTHENTICATED) -->
+    <section id="view-dashboard" class="view-section hidden">
+      <div class="dashboard-header">
+        <div>
+          <span class="badge" id="current-date-badge">May 2026</span>
+          <h2 class="welcome-heading">Welcome back, <span id="user-display-name">Developer</span>!</h2>
+          <p class="section-subtitle">Here is an overview of your active performance and schedule.</p>
+        </div>
+        <button id="btn-trigger-task-modal" class="btn btn-primary">+ Add New Task</button>
+      </div>
+
+      <!-- Statistics Dashboard Summary Row -->
+      <div class="stats-row">
+        <div class="stat-box glass-panel glow-indigo">
+          <div class="stat-icon">📋</div>
+          <div>
+            <span class="stat-title">Total Tasks</span>
+            <span class="stat-value" id="stat-total-tasks">0</span>
+          </div>
+        </div>
+        <div class="stat-box glass-panel glow-purple">
+          <div class="stat-icon">🕒</div>
+          <div>
+            <span class="stat-title">Active</span>
+            <span class="stat-value" id="stat-active-tasks">0</span>
+          </div>
+        </div>
+        <div class="stat-box glass-panel glow-green">
+          <div class="stat-icon">✅</div>
+          <div>
+            <span class="stat-title">Completed</span>
+            <span class="stat-value" id="stat-completed-tasks">0</span>
+          </div>
+        </div>
+        <div class="stat-box glass-panel glow-blue">
+          <div class="stat-icon">📈</div>
+          <div>
+            <span class="stat-title">Completion Rate</span>
+            <span class="stat-value" id="stat-completion-rate">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Main Section -->
+      <div class="dashboard-grid">
+        <!-- Tasks Display Panel -->
+        <div class="tasks-panel">
+          <div class="panel-header">
+            <h3>Your Tasks</h3>
+            <div class="filter-controls">
+              <button id="filter-all" class="filter-btn active">All</button>
+              <button id="filter-active" class="filter-btn">Active</button>
+              <button id="filter-completed" class="filter-btn">Completed</button>
+            </div>
+          </div>
+
+          <div class="tasks-list" id="tasks-container">
+            <!-- Tasks dynamically rendered here -->
+            <div class="empty-state">
+              <span class="empty-icon">🎉</span>
+              <p>You are all caught up! No tasks left to do.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add Task Form Card (Sidebar integration) -->
+        <div class="task-form-panel glass-panel" id="task-creator-panel">
+          <h3>Create Task</h3>
+          <p class="panel-desc">Quickly queue a new item to your personal roadmap.</p>
+          <form id="form-create-task" class="dashboard-form">
+            <div class="form-group">
+              <label for="task-title">Task Title</label>
+              <input type="text" id="task-title" class="form-input" placeholder="e.g. Design app concept" required>
+            </div>
+            <div class="form-group">
+              <label for="task-desc">Description</label>
+              <textarea id="task-desc" class="form-input form-textarea" placeholder="Describe the objectives..." required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="task-date">Due Date</label>
+              <input type="date" id="task-date" class="form-input" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Queue Task</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ADMIN PANEL VIEW (UNAUTHENTICATED) -->
+    <section id="view-admin" class="view-section hidden">
+      <div class="admin-headline glass-panel glow-red">
+        <div class="alert-icon">⚠️</div>
+        <div>
+          <h2>Unauthenticated Administration Control Panel</h2>
+          <p>
+            <strong>Security Scan Assessment Mode:</strong> This panel and the accompanying backend REST route 
+            (<code>/api/admin/users</code>) do not verify authorization tokens. Anyone visiting this section has 
+            unrestricted access to inspect the database, showing plaintext stored credentials and individual task roadmaps.
+          </p>
+        </div>
+      </div>
+
+      <div class="admin-data-section">
+        <div class="panel-header">
+          <h3>Database Dump (Users &amp; Passwords)</h3>
+          <button id="btn-refresh-admin" class="btn btn-secondary">🔄 Refresh Data</button>
+        </div>
+
+        <div class="users-grid" id="admin-users-container">
+          <!-- Users and their plaintext passwords will be populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="main-footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 TaskFlow Inc. Built with intentional vulnerabilities for scanner testing configurations.</p>
+      <div class="footer-links">
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <a href="#" class="footer-link">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal for creating tasks (Alternative popup) -->
+  <div class="modal-overlay hidden" id="task-modal">
+    <div class="modal-card glass-panel">
+      <div class="modal-header">
+        <h3>Create New Task</h3>
+        <button id="btn-close-modal" class="modal-close">&times;</button>
+      </div>
+      <form id="form-modal-create-task" class="dashboard-form">
+        <div class="form-group">
+          <label for="modal-task-title">Task Title</label>
+          <input type="text" id="modal-task-title" class="form-input" placeholder="e.g. Run audit scripts" required>
+        </div>
+        <div class="form-group">
+          <label for="modal-task-desc">Description</label>
+          <textarea id="modal-task-desc" class="form-input form-textarea" placeholder="Task details..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="modal-task-date">Due Date</label>
+          <input type="date" id="modal-task-date" class="form-input" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Create Task</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
