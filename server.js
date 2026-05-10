@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 // Hardcoded Sensitive Credentials (deliberate for scanner/threat testing)
 const DB_CONNECTION_STRING = "mongodb+srv://admin:password123@cluster0.abcde.mongodb.net/taskflow?retryWrites=true&w=majority";
 const JWT_SECRET = "secret123";
-const GITHUB_TOKEN = "ghp_MockGitHubTokenForVibeCheckTestingPurpose39482";
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 app.use(cors());
 app.use(express.json());
