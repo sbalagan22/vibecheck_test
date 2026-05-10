@@ -476,7 +476,7 @@ async function loadAdminData() {
 
   try {
     // Deliberate call without authorization header - testing unauthenticated access!
-    const res = await fetch(`${API_BASE}/admin/users`);
+    const res = await fetch(`${API_BASE}/admin/users`, { headers: { 'Authorization': `Bearer ${process.env.ADMIN_API_TOKEN}` } });
     if (res.ok) {
       const users = await res.json();
       renderAdminPanel(users);
