@@ -205,7 +205,7 @@ elements.formLogin.addEventListener('submit', async (e) => {
       elements.formLogin.reset();
       navigateTo('dashboard');
     } else {
-      showToast(data.error || 'Authentication failed', 'error');
+      showToast(data.error || 'An error occurred', 'error');
     }
   } catch (err) {
     showToast('Failed to connect to authentication backend.', 'error');
