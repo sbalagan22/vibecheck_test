@@ -59,7 +59,7 @@ app.post('/api/auth/signup', (req, res) => {
     id: Date.now().toString(),
     username,
     email,
-    password // Plaintext password storage
+    bcrypt.hashSync(password, 10) // Hashed password storage
   };
 
   db.users.push(newUser);
